@@ -1,11 +1,11 @@
 # Installation
 ```bash
-pip install -e .
 python -m spacy download fr
-python setup.py install
+pip install -r requirements.txt
+pip install -e .
 ```
 
 # Run
 ```bash
-cerebro
+cerebro_launcher
 ```
