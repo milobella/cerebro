@@ -33,7 +33,17 @@ async def home(request):
 
 @_app.route('/understand')
 async def understand(request):
-    return json(_nlp(request.args["query"][0]).cats)
+    result = []
+    confidences = _nlp(request.args["query"][0]).cats
+    for intent, confidence in confidences.items():
+        if confidence > 0.1:
+            # TODO: find a way to get parameters dynamically
+            result.append({
+                "intent": intent,
+                "score": confidence,
+                "parameters": {} if intent != "ADD_TO_LIST" else {"items": ["des tomates", "des courgettes"]}
+            })
+    return json(result)
 
 
 if __name__ == '__main__':
