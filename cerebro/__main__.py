@@ -10,6 +10,7 @@ from sanic.response import json
 # Initialize the config
 _config = configparser.ConfigParser()
 _config.read('cerebro.ini')
+_min_score = _config["nlp"].getfloat("min_score")
 
 # Initialize the sanic app
 _app = Sanic()
@@ -33,17 +34,29 @@ async def home(request):
 
 @_app.route('/understand')
 async def understand(request):
-    result = []
-    confidences = _nlp(request.args["query"][0]).cats
-    for intent, confidence in confidences.items():
-        if confidence > 0.1:
-            # TODO: find a way to get parameters dynamically
-            result.append({
-                "intent": intent,
-                "score": confidence,
-                "parameters": {} if intent != "ADD_TO_LIST" else {"items": ["des tomates", "des courgettes"]}
-            })
-    return json(result)
+    """
+    Understand handler : client give a text query and we return a simplified version of the spaCy result document.
+    :param request: user's request, contains the text query
+    :return: simple json object with intents and entities.
+        - intents: list of intents with its label and score, sorted by decreasing score;
+        - entities: list of entities with its label and text (literal value).
+    """
+    # Build the recognition document from text dictated by user.
+    _text = request.args["query"][0]
+    _doc = _nlp(_text)
+
+    # Get entities from document (using trained NER - Named Entity Recognition).
+    entities = [{"label": ent.label_, "text": ent.text} for ent in _doc.ents]
+
+    # Get intents from document (using trained text categories). We sort it by decreasing score
+    intents = [{"label": name, "score": score} for name, score in _doc.cats.items() if score > _min_score]
+    intents = sorted(intents, key=lambda intent: intent['score'], reverse=True)
+
+    # Returns what spaCy understood in a simplified format
+    return json({
+        "intents": intents,
+        "entities": entities
+    })
 
 
 if __name__ == '__main__':
