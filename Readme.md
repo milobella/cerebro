@@ -17,5 +17,5 @@ It might take a few minutes.
 
 # Run
 ```bash
-cerebro_launcher
+cerebro
 ```

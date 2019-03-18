@@ -5,9 +5,10 @@ setup(
     version='0.1-dev',
     entry_points={
       'console_scripts': [
-          'cerebro_launcher=cerebro.__main__:main'
+          'cerebro = cerebro:main'
       ]
     },
+    py_modules=['cerebro'],
     url='',
     license='',
     author='Célian Garcia',
