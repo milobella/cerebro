@@ -1,8 +1,12 @@
 from setuptools import setup
 
+version = None
+with open('VERSION.txt', 'r') as fp:
+    version = fp.read()
+
 setup(
     name='cerebro',
-    version='0.1-dev',
+    version=version,
     entry_points={
       'console_scripts': [
           'cerebro = cerebro:main'
