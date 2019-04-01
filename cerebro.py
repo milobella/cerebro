@@ -7,16 +7,33 @@ import spacy
 from sanic import response, Sanic
 from sanic.response import json
 
+import logging
+ 
+from logging.handlers import RotatingFileHandler
+ 
+# Initialize logger (TODO: industrialize it)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(formatter)
+stream_handler.setLevel(logging.DEBUG)
+logger.addHandler(stream_handler)
+
 # Initialize the config
+logger.debug("Initialize configuration ...")
 _config = configparser.ConfigParser()
 _config.read('cerebro.ini')
+logger.debug("Successfully initialized configuration ! {0}".format(_config))
 _min_score = _config["nlp"].getfloat("min_score")
 
 # Initialize the sanic app
 _app = Sanic()
 
 # Load the spacy model
+logger.debug("Loading Spacy Data ...")
 _nlp = spacy.load("data")
+logger.debug("Successfully loaded Spacy Data !")
 
 
 def main():
