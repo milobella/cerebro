@@ -5,3 +5,4 @@ dist
 bin
 *.egg-info
 __pycache__
+data
