@@ -20,8 +20,6 @@ build:
     # Login to gitlab registry
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-  # Write the id_rsa private key into the good path
-  - mkdir -p private && echo "$SSH_PRIVATE_KEY" | tr -d '\r' > private/id_rsa
   - docker build -t $CONTAINER_TEST_IMAGE .
   - docker push $CONTAINER_TEST_IMAGE
   tags: [docker,milobella]
