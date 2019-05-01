@@ -26,6 +26,10 @@ TRAIN_DATA = [
         "cats": {"ADD_TO_LIST": 1},
         'entities': [(11, 18, 'SHOPITEM')]
     }),
+    (u"on fait la liste de courses", {"cats": {"TRIGGER_SHOPPING_LIST": 1}}),
+    (u"c'est parti pour la liste de courses", {"cats": {"TRIGGER_SHOPPING_LIST": 1}}),
+    (u"faisons les courses", {"cats": {"TRIGGER_SHOPPING_LIST": 1}}),
+    (u"on peut faire la liste de courses", {"cats": {"TRIGGER_SHOPPING_LIST": 1}}),
 ]
 
 ENTITIES = ['SHOPITEM']
