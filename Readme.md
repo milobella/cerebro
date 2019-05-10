@@ -24,6 +24,11 @@ It might take a few minutes.
 cerebro
 ```
 
+## Request example
+```bash
+$ curl -i http://localhost:9444/understand?query="Bonjour"
+```
+
 ## CHANGELOGS
 - [Application changelog](./CHANGELOG.md)
 - [Helm chart changelog](./helm/cerebro/CHANGELOG.md)
