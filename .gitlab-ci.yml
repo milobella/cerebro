@@ -64,7 +64,7 @@ deploy:
     # Package the helm chart into a tgz repository
     - helm package helm/cerebro --app-version=${APP_VERSION} --destination bin
     # Install/Upgrade the freshly packaged helm chart into the minikube cluster
-    - helm upgrade --install cerebro bin/cerebro-*.tgz --debug --set image.tag=${APP_VERSION}
+    - helm upgrade --recreate-pods --force --install cerebro bin/cerebro-*.tgz --debug --set image.tag=${APP_VERSION}
   tags: [docker,milobella]
   only: [master]
 

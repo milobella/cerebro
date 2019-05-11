@@ -124,7 +124,7 @@ def main():
         if 'entities' in annotation:
             train_entities_data.append((doc, {'entities': annotation["entities"]}))
 
-    nlp = spacy.load('fr')
+    nlp = spacy.load('fr_core_news_md')
 
     train_categories(nlp, all_categories, train_categories_data)
 
