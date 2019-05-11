@@ -1,21 +1,29 @@
 from setuptools import setup
 
-version = None
 with open('VERSION.txt', 'r') as fp:
     version = fp.read()
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 setup(
+    # == Name & descriptions ==
     name='cerebro',
-    version=version,
-    entry_points={
-      'console_scripts': [
-          'cerebro = cerebro:main'
-      ]
-    },
-    py_modules=['cerebro'],
     url='',
     license='',
     author='Célian Garcia',
     author_email='celian.garcia1@gmail.com',
-    description=''
+    description='',
+
+    # == Technical configuration ==
+    version=version,
+    require=requirements,
+    setup_requires=["pytest-runner"],
+    entry_points={
+        'console_scripts': [
+            'cerebro = cerebro:main'
+        ]
+    },
+    py_modules=['cerebro'],
+
 )

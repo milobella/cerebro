@@ -34,7 +34,7 @@ TRAIN_DATA = [
 
 ENTITIES = ['SHOPITEM']
 
-ITERATIONS = 100
+ITERATIONS = 40
 
 
 def train_ner(nlp, all_entities, train_entities_data):

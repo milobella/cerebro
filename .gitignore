@@ -6,3 +6,4 @@ bin
 *.egg-info
 __pycache__
 data
+.eggs

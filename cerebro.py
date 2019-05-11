@@ -37,7 +37,7 @@ logger.debug("Successfully loaded Spacy Data !")
 
 
 def main():
-    # Run the vibora app
+    # Run the app
     _app.run(
         host=_config['server']['url'],
         port=_config['server'].getint('port')
@@ -49,7 +49,7 @@ async def home(request):
     return response.html('<p>Hello world!</p>')
 
 
-@_app.route('/understand')
+@_app.route('/understand', methods=["GET", "POST"],)
 async def understand(request):
     """
     Understand handler : client give a text query and we return a simplified version of the spaCy result document.
@@ -58,8 +58,9 @@ async def understand(request):
         - intents: list of intents with its label and score, sorted by decreasing score;
         - entities: list of entities with its label and text (literal value).
     """
+
     # Build the recognition document from text dictated by user.
-    _text = request.args["query"][0]
+    _text = request.args["query"][0] if "GET" == request.method else request.json["text"]
     _doc = _nlp(_text)
 
     # Get entities from document (using trained NER - Named Entity Recognition).
