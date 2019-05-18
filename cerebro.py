@@ -2,15 +2,12 @@
 # coding: utf8
 
 import configparser
+import logging
 
 import spacy
 from sanic import response, Sanic
 from sanic.response import json
 
-import logging
- 
-from logging.handlers import RotatingFileHandler
- 
 # Initialize logger (TODO: industrialize it)
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -49,7 +46,7 @@ async def home(request):
     return response.html('<p>Hello world!</p>')
 
 
-@_app.route('/understand', methods=["GET", "POST"],)
+@_app.route('/understand', methods=["GET", "POST"], )
 async def understand(request):
     """
     Understand handler : client give a text query and we return a simplified version of the spaCy result document.
@@ -70,11 +67,33 @@ async def understand(request):
     intents = [{"label": name, "score": score} for name, score in _doc.cats.items() if score > _min_score]
     intents = sorted(intents, key=lambda intent: intent['score'], reverse=True)
 
+    # Get lemmas from document
+    lemmas = [token.lemma_ for token in _doc]
+
+    # Get verbs from document
+    verbs = [token.lemma_ for token in _doc if token.pos_ == "VERB"]
+
+    # Get a simplified version of tokens
+    tokens = [simplify(token) for token in _doc]
+
     # Returns what spaCy understood in a simplified format
     return json({
         "intents": intents,
-        "entities": entities
+        "entities": entities,
+        "verbs": verbs,
+        "lemmas": lemmas,
+        "tokens": tokens
     })
+
+
+def simplify(token):
+    return {
+        "lemma": token.lemma_,
+        "tag": token.tag_,
+        "pos": token.pos_,
+        "literal": token.text,
+        "head_index": token.head.i
+    }
 
 
 if __name__ == '__main__':

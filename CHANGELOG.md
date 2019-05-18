@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ##  [0.1]
 ###  Added
+- Added some response fields : ``verbs``, ``lemmas``, ``tokens``
 - Created ``TRIGGER_SHOPPING_LIST`` intent
 - Created a Dockerfile to generate a docker image
 - Initialized the main architecture

@@ -35,6 +35,7 @@ class TestRestApiDeprecated(object):
         resp.ok | should.be.true
         result = json.loads(resp.content)
         result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('HELLO')
         result["entities"] | should.be.empty
 
     def test_understand_deprecated__time(self):
@@ -42,6 +43,7 @@ class TestRestApiDeprecated(object):
         resp.ok | should.be.true
         result = json.loads(resp.content)
         result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('GET_TIME')
         result["entities"] | should.be.empty
 
     def test_understand__hello(self):
@@ -49,6 +51,7 @@ class TestRestApiDeprecated(object):
         resp.ok | should.be.true
         result = json.loads(resp.content)
         result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('HELLO')
         result["entities"] | should.be.empty
 
     def test_understand__time(self):
@@ -56,4 +59,14 @@ class TestRestApiDeprecated(object):
         resp.ok | should.be.true
         result = json.loads(resp.content)
         result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('GET_TIME')
         result["entities"] | should.be.empty
+
+    def test_understand__shopping_list(self):
+        resp = self._api.understand("ajoute des fraises à ma liste")
+        resp.ok | should.be.true
+        result = json.loads(resp.content)
+        result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('ADD_TO_LIST')
+        result["entities"] | should.not_be.empty
+        result["entities"][0] | should.be.equal.to({'label': 'SHOPITEM', 'text': 'fraises'})
