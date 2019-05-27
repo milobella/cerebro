@@ -2,3 +2,5 @@ Dockerfile
 .gitignore
 .git
 venv
+spacy_sandbox
+helm

@@ -19,11 +19,6 @@ setup(
     version=version,
     require=requirements,
     setup_requires=["pytest-runner"],
-    entry_points={
-        'console_scripts': [
-            'cerebro = cerebro:main'
-        ]
-    },
     py_modules=['cerebro'],
 
 )

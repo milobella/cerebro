@@ -3,10 +3,12 @@ FROM python:3.7
 WORKDIR /app
 COPY . /app
 
-RUN pip install -r requirements.txt
+# Install cerebro module and dependencies
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    pip install .
+
+# Download the spacy base model
 RUN python -m spacy download fr_core_news_md
-RUN python spacy_sandbox/simple_cats.py
-RUN pip install .
 
-
-CMD ["cerebro"]
+CMD ["python", "manage.py", "runserver"]
