@@ -48,6 +48,12 @@ class NLPRepositoryFake(Repository):
             Sample("mets un minuteur de 10 minutes", [Category("SET_TIMER")]),
             Sample("mets un timer de 15 minutes", [Category("SET_TIMER")]),
 
+            # Weather
+            Sample("quel temps il fait à Paris", [Category("GET_WEATHER")]),
+            Sample("donne-moi la météo", [Category("GET_WEATHER")]),
+            Sample("météo", [Category("GET_WEATHER")]),
+            Sample("quel temps fait-il", [Category("GET_WEATHER")]),
+
         ])
 
     def update(self, entity: NLPModel) -> bool:
