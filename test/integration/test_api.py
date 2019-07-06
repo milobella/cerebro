@@ -70,3 +70,11 @@ class TestRestApiDeprecated(object):
         result["intents"][0]['label'] | should.be.equal.to('ADD_TO_LIST')
         result["entities"] | should.not_be.empty
         result["entities"][0] | should.be.equal.to({'label': 'SHOPITEM', 'text': 'fraises'})
+
+    def test_understand__trigger_shopping_list(self):
+        resp = self._api.understand("on fait la liste de course")
+        resp.ok | should.be.true
+        result = json.loads(resp.content)
+        result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('TRIGGER_SHOPPING_LIST')
+        result["entities"] | should.be.empty
