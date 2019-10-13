@@ -21,12 +21,26 @@ It might take a few minutes.
 
 ## Run
 ```bash
-cerebro
+$ python manage.py runserver --config-file cerebro.ini
+```
+
+## Upload and train a model
+When the server is running, this is not over. You have two tasks to perform to make it work.
+
+#### Upload the model (not necessary if the model is already in database)
+```bash
+$ curl -iv -X PUT 'http://localhost:9444/models/default/samples' -d @samples.json
+```
+An example of ``samples.json`` file format is here : [./scripts/samples.json](./scripts/samples.json)
+
+#### Train the model (necessary after each server start and after each upload)
+```bash
+$ curl -iv -X POST 'http://localhost:9444/models/default/train'
 ```
 
 ## Request example
 ```bash
-$ curl -i http://localhost:9444/understand?query="Bonjour"
+$ curl -iv http://localhost:9444/understand?query="Bonjour"
 ```
 
 ## CHANGELOGS

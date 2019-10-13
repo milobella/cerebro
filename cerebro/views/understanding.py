@@ -1,16 +1,19 @@
+import logging
 import warnings
 
-from sanic.exceptions import ServerError
+from sanic.exceptions import ServiceUnavailable
 from sanic.response import json
 from sanic.views import HTTPMethodView
 
-from cerebro.processing.nlp_manager import NLPManager, NotAvailableException
+from cerebro.spacy.spacy_manager import ModelIsUpdatingException, ModelNeedAnUpdateException
+from cerebro.spacy.spacy_request_service import SpaCyRequestService
 
 
 class UnderstandingView(HTTPMethodView):
 
-    def __init__(self, nlp_manager: NLPManager):
-        self._nlp_manager = nlp_manager
+    def __init__(self, request_service: SpaCyRequestService):
+        self._logger = logging.getLogger(self.__class__.__name__)
+        self._request_service = request_service
 
     async def get(self, request):
         warnings.warn(
@@ -33,7 +36,8 @@ class UnderstandingView(HTTPMethodView):
             - lemmas: list of lemmas in the sentence.
             - list of the tokens in the sentence.
         """
+        self._logger.debug(f"Trying to understand sentence : {text}")
         try:
-            return json(self._nlp_manager.understand(text))
-        except NotAvailableException:
-            raise ServerError("Service unavailable.", status_code=503)
+            return json(self._request_service.understand(text))
+        except (ModelIsUpdatingException, ModelNeedAnUpdateException) as e:
+            raise ServiceUnavailable(e)
