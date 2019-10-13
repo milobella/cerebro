@@ -1,3 +1,5 @@
+fastjsonschema
+pymongo
 sanic
 spacy
 grappa

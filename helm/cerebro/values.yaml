@@ -6,7 +6,6 @@ replicaCount: 1
 
 image:
   repository: celiangarcia/cerebro
-  tag: 1.0
   pullPolicy: Always
 
 nameOverride: ""

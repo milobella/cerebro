@@ -1,65 +1,70 @@
 #!/usr/bin/env python
 # coding: utf8
-import configparser
 import logging
-from threading import Thread
 
 from sanic import Sanic
 
-from cerebro.model.nlp_repository_fake import NLPRepositoryFake
-from cerebro.model.spacy_manager import SpacyManager
-from cerebro.processing.nlp_manager import NLPManager
+from cerebro.repository.nlp_repository import Repository
+from cerebro.repository.nlp_repository_fake import NLPRepositoryFake
+from cerebro.repository.nlp_repository_mongo import NLPRepositoryMongo
+from cerebro.spacy.spacy_manager import SpaCyModelManager
+from cerebro.spacy.spacy_request_service import SpaCyRequestService
+from cerebro.views.samples import SamplesView
+from cerebro.views.training import TrainingView
 from cerebro.views.understanding import UnderstandingView
 from cerebro.views.web import HtmlView
-from cerebro.utils import config_to_dict
-
-# Initialize logger
-logging_format = "[%(asctime)s] %(process)d-%(levelname)s "
-logging_format += "%(module)s::%(funcName)s():l%(lineno)d: "
-logging_format += "%(message)s"
-
-logging.basicConfig(
-    format=logging_format,
-    level=logging.DEBUG
-)
-logger = logging.getLogger()
-
-# Initialize the config
-logger.debug("Initialize configuration ...")
-_config = configparser.ConfigParser()
-_config.read('cerebro.ini')
-logger.debug("Successfully initialized configuration ! {0}".format(config_to_dict(_config)))
-
-# Initialize the sanic app
-_app = Sanic()
 
 
-def run(host: str = None, port: int = None):
-    # Initialize parameters (host and port parameters can be overriden by command line)
-    host = _config['server'].get('url') if host is None else host
-    port = _config['server'].getint('port') if port is None else port
-    spacy_manager_options = {
-        "min_score": _config["spacy"].getfloat("min_score", fallback=None),
-        "model": _config["spacy"].get("model", fallback=None),
-        "iterations": _config["spacy"].getint("iterations", fallback=None)
-    }
-    # Ensure that default values of spacy manager ctor will be used
-    spacy_manager_options = {key: value for key, value in spacy_manager_options.items() if value is not None}
+def run(**params):
+    logger = logging.getLogger()
 
-    # Build the project's architecture
-    repository = NLPRepositoryFake()
-    spacy_manager = SpacyManager(**spacy_manager_options)
-    manager = NLPManager(repository, spacy_manager)
+    # Initialize the sanic app
+    _app = Sanic(configure_logging=False)
 
-    # Server routing
+    repository = build_repository(**params)
+
     _app.add_route(HtmlView.as_view(), '/')
-    _app.add_route(UnderstandingView.as_view(manager), '/understand')
+    _app.add_route(SamplesView.as_view(repository), '/models/<model_id:string>/samples')
 
-    # Asynchronous call to data loading
-    Thread(target=manager.load_data).start()
+    if params["use_spacy"]:
+        spacy_manager = SpaCyModelManager(
+            repository, model=params["model"],
+            iterations=params["iterations"],
+            chunk_size=params["chunk_size"]
+        )
+        spacy_request = SpaCyRequestService(
+            spacy_manager, min_score=params["min_score"]
+        )
+
+        _app.add_route(UnderstandingView.as_view(spacy_request), '/understand')
+        _app.add_route(TrainingView.as_view(spacy_manager), '/models/<model_id>/train')
+
+        # # Asynchronous call to SpaCy training
+        # spacy_manager.update_model("default")
+    else:
+        logger.warn(
+            "\n#######  !! SpaCy has been disabled !!  ########"
+            "\n Cerebro is not really interesting without SpaCy ;)."
+            "\n You can reactivate it with this line in config:"
+            "\n ================="
+            "\n\t[features]"
+            "\n\tuse_spacy = true"
+            "\n ================="
+            "\n################################################")
 
     # Run the server
     _app.run(
-        host=host,
-        port=port,
+        host=params["host"],
+        port=params["port"],
     )
+
+
+def build_repository(**params) -> Repository:
+    if params["use_mongo"]:
+        return NLPRepositoryMongo(
+            host=params["mongo_host"],
+            port=params["mongo_port"],
+            database=params["mongo_database"]
+        )
+    else:
+        return NLPRepositoryFake()
