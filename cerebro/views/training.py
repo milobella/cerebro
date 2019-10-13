@@ -14,9 +14,9 @@ class TrainingView(HTTPMethodView):
         self._logger = logging.getLogger(self.__class__.__name__)
         self._spacy_manager = spacy_manager
 
-    async def get(self, _: Request):
+    async def get(self, _: Request, model_id: str):
         if self._spacy_manager.is_updating:
-            raise ServiceUnavailable()
+            raise ServiceUnavailable(message="A train is in progress. Wait some minutes.")
 
         return response.text("The model should work properly", status=200)
 
