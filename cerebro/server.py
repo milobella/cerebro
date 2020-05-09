@@ -62,7 +62,7 @@ def run(**params):
 def build_repository(**params) -> Repository:
     if params["use_mongo"]:
         return NLPRepositoryMongo(
-            host=params["mongo_url"],
+            url=params["mongo_url"],
             database=params["mongo_database"]
         )
     else:
