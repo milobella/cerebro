@@ -39,8 +39,7 @@ def runserver_func(arguments: argparse.Namespace):
         "use_mongo": _config["features"].getboolean("use_mongo", fallback=False),
         "use_spacy": _config["features"].getboolean("use_spacy", fallback=False),
 
-        "mongo_host": _config["mongodb"].get("host", fallback="0.0.0.0"),
-        "mongo_port": _config["mongodb"].getint("port", fallback="27017"),
+        "mongo_url": _config["mongodb"].get("url", fallback="0.0.0.0:27017"),
         "mongo_database": _config["mongodb"].get("database", fallback="cerebro"),
     }
 
