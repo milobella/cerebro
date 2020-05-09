@@ -7,14 +7,13 @@ from cerebro.repository.nlp_repository import Repository
 
 class NLPRepositoryMongo(Repository):
 
-    def __init__(self, host: str, port: int, database: str):
-        self._host = host
-        self._port = port
+    def __init__(self, url:str, database: str):
+        self._url = url
         self._database = database
 
     @property
     def _client(self):
-        return MongoClient(self._host, self._port)
+        return MongoClient(self._url)
 
     def get_samples(self, model_id: str, start: int, limit: int) -> List[Dict]:
         """

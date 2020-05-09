@@ -24,6 +24,5 @@ data:
     use_spacy = true
 
     [mongodb]
-    host = mongo-0.mongo
-    port = 27017
+    url = mongo-0.mongo:27017
     database = cerebro
