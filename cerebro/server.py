@@ -19,7 +19,7 @@ def run(**params):
     logger = logging.getLogger()
 
     # Initialize the sanic app
-    _app = Sanic(configure_logging=False)
+    _app = Sanic(name="cerebro", configure_logging=False)
 
     repository = build_repository(**params)
 
