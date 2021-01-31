@@ -101,4 +101,5 @@ class NLPRepositoryMongo(Repository):
         db = client[self._database]
         db.entities.delete_many({"model": model_id})
         ent_objs = [{"name": ent, "model": model_id} for ent in entities]
-        db.entities.insert_many(ent_objs)
+        if len(ent_objs) >= 0:
+            db.entities.insert_many(ent_objs)
