@@ -89,7 +89,7 @@ class NLPRepositoryMongo(Repository):
         cat_objs = [{"name": cat, "model": model_id} for cat in categories]
         db.categories.insert_many(cat_objs)
 
-    def _update_entities(self, client: MongoClient, model_id: str, entities: Set[str], ):
+    def _update_entities(self, client: MongoClient, model_id: str, entities: Set[str]):
         """
         For sake of simplicity, we remove all entities of a model before to insert the new ones. Not so critical
         because there is not so many entities in a model.
@@ -101,5 +101,5 @@ class NLPRepositoryMongo(Repository):
         db = client[self._database]
         db.entities.delete_many({"model": model_id})
         ent_objs = [{"name": ent, "model": model_id} for ent in entities]
-        if len(ent_objs) >= 0:
+        if ent_objs:
             db.entities.insert_many(ent_objs)
