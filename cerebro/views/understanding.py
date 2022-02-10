@@ -15,13 +15,6 @@ class UnderstandingView(HTTPMethodView):
         self._logger = logging.getLogger(self.__class__.__name__)
         self._request_service = request_service
 
-    async def get(self, request):
-        warnings.warn(
-            "Shouldn't use this endpoint anymore! Now use POST with text in body.",
-            DeprecationWarning
-        )
-        return self._understand(request.args["query"][0])
-
     async def post(self, request):
         return self._understand(request.json["text"])
 

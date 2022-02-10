@@ -33,6 +33,7 @@ class SpaCyRequestService:
 
         # Returns what spaCy understood in a simplified format
         return {
+            "text": text,
             "intents": intents,
             "entities": entities,
             "verbs": verbs,
