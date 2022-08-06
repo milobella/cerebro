@@ -1,6 +1,6 @@
 fastjsonschema==2.14.4
 pymongo==3.10.1
-sanic==20.12.6
+sanic==20.12.7
 spacy==2.0.18
 grappa==0.1.12
 pytest==5.4.2
