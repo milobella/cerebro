@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.10
 
 LABEL maintainer="celian.garcia1@gmail.com"
 
@@ -34,4 +34,4 @@ RUN pip install --upgrade pip && \
 RUN python -m spacy download fr_core_news_md
 
 # Build the main command
-CMD ["python", "manage.py", "runserver"]
+CMD ["sanic", "cerebro.server.app"]

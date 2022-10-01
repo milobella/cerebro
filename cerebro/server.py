@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # coding: utf8
 import logging
+from typing import Dict, Any
 
+import yaml as yaml
 from sanic import Sanic
+from sanic.config import Config
 
 from cerebro.repository.nlp_repository import Repository
 from cerebro.repository.nlp_repository_fake import NLPRepositoryFake
@@ -15,48 +18,29 @@ from cerebro.views.understanding import UnderstandingView
 from cerebro.views.web import HtmlView
 
 
-def run(**params):
-    logger = logging.getLogger()
+class YamlConfig(Config):
+    def __init__(self, *args, path: str, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    # Initialize the sanic app
-    _app = Sanic(name="cerebro", configure_logging=False)
+        with open(path, "r") as f:
+            self.apply(yaml.safe_load(f))
 
-    repository = build_repository(**params)
+    def apply(self, config):
+        self.update(self._to_uppercase(config))
 
-    _app.add_route(HtmlView.as_view(), '/')
-    _app.add_route(SamplesView.as_view(repository), '/models/<model_id:string>/samples')
-
-    if params["use_spacy"]:
-        spacy_manager = SpaCyModelManager(
-            repository, model=params["model"],
-            iterations=params["iterations"],
-            chunk_size=params["chunk_size"]
-        )
-        spacy_request = SpaCyRequestService(
-            spacy_manager, min_score=params["min_score"]
-        )
-
-        _app.add_route(UnderstandingView.as_view(spacy_request), '/understand')
-        _app.add_route(TrainingView.as_view(spacy_manager), '/models/<model_id>/train')
-
-        # # Asynchronous call to SpaCy training
-        # spacy_manager.update_model("default")
-    else:
-        logger.warn(
-            "\n#######  !! SpaCy has been disabled !!  ########"
-            "\n Cerebro is not really interesting without SpaCy ;)."
-            "\n You can reactivate it with this line in config:"
-            "\n ================="
-            "\n\t[features]"
-            "\n\tuse_spacy = true"
-            "\n ================="
-            "\n################################################")
-
-    # Run the server
-    _app.run(
-        host=params["host"],
-        port=params["port"],
-    )
+    def _to_uppercase(self, obj: Dict[str, Any]) -> Dict[str, Any]:
+        retval: Dict[str, Any] = {}
+        for key, value in obj.items():
+            upper_key = key.upper()
+            if isinstance(value, list):
+                retval[upper_key] = [
+                    self._to_uppercase(item) for item in value
+                ]
+            elif isinstance(value, dict):
+                retval[upper_key] = self._to_uppercase(value)
+            else:
+                retval[upper_key] = value
+        return retval
 
 
 def build_repository(**params) -> Repository:
@@ -67,3 +51,42 @@ def build_repository(**params) -> Repository:
         )
     else:
         return NLPRepositoryFake()
+
+
+logger = logging.getLogger()
+
+# Initialize the sanic app
+config = YamlConfig(path="cerebro.yaml")
+app = Sanic(name="cerebro", config=config)
+
+# repository = build_repository(**params)
+repository = NLPRepositoryFake()
+
+app.add_route(HtmlView.as_view(), '/')
+app.add_route(SamplesView.as_view(repository), '/models/<model_id:str>/samples')
+
+if config["CEREBRO"]["FEATURES"]["USE_SPACY"]:
+    spacy_manager = SpaCyModelManager(
+        repository, model=config["CEREBRO"]["SPACY"]["MODEL"],
+        iterations=config["CEREBRO"]["SPACY"]["ITERATIONS"],
+        chunk_size=config["CEREBRO"]["SPACY"]["CHUNK_SIZE"]
+    )
+    spacy_request = SpaCyRequestService(
+        spacy_manager, min_score=config["CEREBRO"]["SPACY"]["MIN_SCORE"]
+    )
+
+    app.add_route(UnderstandingView.as_view(spacy_request), '/understand')
+    app.add_route(TrainingView.as_view(spacy_manager), '/models/<model_id:str>/train')
+
+    # # Asynchronous call to SpaCy training
+    # spacy_manager.update_model("default")
+else:
+    logger.warn(
+        "\n#######  !! SpaCy has been disabled !!  ########"
+        "\n Cerebro is not really interesting without SpaCy ;)."
+        "\n You can reactivate it with this line in config:"
+        "\n ================="
+        "\n\t[features]"
+        "\n\tuse_spacy = true"
+        "\n ================="
+        "\n################################################")

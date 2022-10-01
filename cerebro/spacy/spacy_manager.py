@@ -80,7 +80,7 @@ class SpaCyModelManager:
             categories = self._repository.get_categories(model_id)
             entities = self._repository.get_entities(model_id)
             nlp_factory = SpacyModelFactory(model=self._model_source, iterations=self._iterations,
-                                            categories=categories, entities=entities)
+                                            intents=categories, entities=entities)
             nlp_factory.load_model()
             start = 0
             while "Some samples are remaining":
