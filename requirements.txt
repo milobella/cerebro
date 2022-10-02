@@ -1,4 +1,4 @@
-fastjsonschema==2.14.4
+fastjsonschema==2.16.2
 pymongo==3.12.3
 sanic==22.9.0
 spacy==3.4.1
