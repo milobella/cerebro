@@ -43,24 +43,19 @@ class YamlConfig(Config):
         return retval
 
 
-def build_repository(**params) -> Repository:
-    if params["use_mongo"]:
-        return NLPRepositoryMongo(
-            url=params["mongo_url"],
-            database=params["mongo_database"]
-        )
-    else:
-        return NLPRepositoryFake()
-
-
 logger = logging.getLogger()
 
 # Initialize the sanic app
 config = YamlConfig(path="cerebro.yaml")
 app = Sanic(name="cerebro", config=config)
 
-# repository = build_repository(**params)
-repository = NLPRepositoryFake()
+if config["CEREBRO"]["FEATURES"]["USE_MONGO"]:
+    repository = NLPRepositoryMongo(
+        url=["CEREBRO"]["MONGODB"]["URL"],
+        database=["CEREBRO"]["MONGODB"]["DATABASE"]
+    )
+else:
+    repository = NLPRepositoryFake()
 
 app.add_route(HtmlView.as_view(), '/')
 app.add_route(SamplesView.as_view(repository), '/models/<model_id:str>/samples')
