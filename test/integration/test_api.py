@@ -11,9 +11,6 @@ class RestApi:
     def hello_world(self):
         return requests.get(f"{self._url}/")
 
-    def understand_deprecated(self, text: str):
-        return requests.get(f"{self._url}/understand?query={text}")
-
     def understand(self, text: str):
         return requests.post(f"{self._url}/understand", json.dumps({"text": text}))
 
@@ -29,22 +26,6 @@ class TestRestApiDeprecated(object):
     def test_hello_world(self):
         resp = self._api.hello_world()
         resp.ok | should.be.true
-
-    def test_understand_deprecated__hello(self):
-        resp = self._api.understand_deprecated("bonjour")
-        resp.ok | should.be.true
-        result = json.loads(resp.content)
-        result["intents"] | should.not_be.empty
-        result["intents"][0]['label'] | should.be.equal.to('HELLO')
-        result["entities"] | should.be.empty
-
-    def test_understand_deprecated__time(self):
-        resp = self._api.understand_deprecated("quelle heure il est")
-        resp.ok | should.be.true
-        result = json.loads(resp.content)
-        result["intents"] | should.not_be.empty
-        result["intents"][0]['label'] | should.be.equal.to('GET_TIME')
-        result["entities"] | should.be.empty
 
     def test_understand__hello(self):
         resp = self._api.understand("bonjour")

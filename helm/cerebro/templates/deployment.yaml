@@ -25,7 +25,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["python", "manage.py", "runserver", "--config-file", "/etc/k8s/cerebro.ini"]
+          command: ["python", "manage.py", "runserver", "--config-file", "/etc/k8s/cerebro.yaml"]
           ports:
             - containerPort: {{ .Values.containerPort }}
           volumeMounts:
@@ -43,7 +43,7 @@ spec:
             name: {{ include "cerebro.fullname" . }}
             items:
               - key: configuration-file
-                path: cerebro.ini
+                path: cerebro.yaml
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

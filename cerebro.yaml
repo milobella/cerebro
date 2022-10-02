@@ -1,0 +1,10 @@
+cerebro:
+  spacy:
+    model: fr_core_news_md
+    iterations: 70
+    min_score: 0.1
+    chunk_size: 1000
+
+  features:
+    use_mongo: false
+    use_spacy: true
