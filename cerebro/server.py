@@ -51,8 +51,8 @@ app = Sanic(name="cerebro", config=config)
 
 if config["CEREBRO"]["FEATURES"]["USE_MONGO"]:
     repository = NLPRepositoryMongo(
-        url=["CEREBRO"]["MONGODB"]["URL"],
-        database=["CEREBRO"]["MONGODB"]["DATABASE"]
+        url=config["CEREBRO"]["MONGODB"]["URL"],
+        database=config["CEREBRO"]["MONGODB"]["DATABASE"]
     )
 else:
     repository = NLPRepositoryFake()
