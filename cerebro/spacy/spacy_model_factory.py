@@ -36,9 +36,17 @@ class SpacyModelFactory:
         if PIPE_ENTITY not in self._nlp.pipe_names:
             self._nlp.add_pipe(PIPE_ENTITY, last=True)
 
+        entity_pipe = self._nlp.get_pipe(PIPE_ENTITY)
+        for entity in self._entities:
+            entity_pipe.add_label(entity)
+
         # === Load categories ===
         if PIPE_INTENT not in self._nlp.pipe_names:
             self._nlp.add_pipe(PIPE_INTENT, last=True)
+
+        intent_pipe = self._nlp.get_pipe(PIPE_INTENT)
+        for intent in self._intents:
+            intent_pipe.add_label(intent)
 
     def register_samples(self, samples: List[Dict]):
         # Build the train data
