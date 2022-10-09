@@ -34,4 +34,4 @@ RUN pip install --upgrade pip && \
 RUN python -m spacy download fr_core_news_md
 
 # Build the main command
-CMD ["sanic", "cerebro.server.app"]
+CMD ["sanic", "cerebro.server.app", "--host=0.0.0.0", "--port=9444"]
