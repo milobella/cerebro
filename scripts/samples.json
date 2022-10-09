@@ -1,140 +1,12 @@
 [
   {
-    "text": "quelle heure il est",
-    "categories": [
-      "GET_TIME"
-    ]
-  },
-  {
-    "text": "c'est quoi l'heure",
-    "categories": [
-      "GET_TIME"
-    ]
-  },
-  {
-    "text": "j'ai besoin de connaître l'heure",
-    "categories": [
-      "GET_TIME"
-    ]
-  },
-  {
-    "text": "aurais-tu une idée de l'heure qu'il est",
-    "categories": [
-      "GET_TIME"
-    ]
-  },
-  {
-    "text": "bonjour",
-    "categories": [
-      "HELLO"
-    ]
-  },
-  {
-    "text": "salut",
-    "categories": [
-      "HELLO"
-    ]
-  },
-  {
-    "text": "hello",
-    "categories": [
-      "HELLO"
-    ]
-  },
-  {
-    "text": "salutations",
-    "categories": [
-      "HELLO"
-    ]
-  },
-  {
-    "text": "il y a quoi au cinéma",
-    "categories": [
-      "LAST_SHOWTIME"
-    ]
-  },
-  {
-    "text": "qu'est ce qu'il y a au ciné ce soir",
-    "categories": [
-      "LAST_SHOWTIME"
-    ]
-  },
-  {
-    "text": "programme ciné",
-    "categories": [
-      "LAST_SHOWTIME"
-    ]
-  },
-  {
-    "text": "je veux écouter Michael Jackson",
-    "categories": [
-      "PLAY_MUSIC"
-    ],
-    "entities": [
-      {
-        "start": 16,
-        "end": 23,
-        "name": "MUSIC_CONTENT"
-      }
-    ]
-  },
-  {
-    "text": "mets de la musique",
-    "categories": [
-      "PLAY_MUSIC"
-    ]
-  },
-  {
-    "text": "écouter Metallica",
-    "categories": [
-      "PLAY_MUSIC"
-    ],
-    "entities": [
-      {
-        "start": 8,
-        "end": 17,
-        "name": "MUSIC_CONTENT"
-      }
-    ]
-  },
-  {
-    "text": "je veux écouter de la musique",
-    "categories": [
-      "PLAY_MUSIC"
-    ]
-  },
-  {
-    "text": "on fait la liste de courses",
-    "categories": [
-      "TRIGGER_SHOPPING_LIST"
-    ]
-  },
-  {
-    "text": "c'est parti pour la liste de courses",
-    "categories": [
-      "TRIGGER_SHOPPING_LIST"
-    ]
-  },
-  {
-    "text": "faisons les courses",
-    "categories": [
-      "TRIGGER_SHOPPING_LIST"
-    ]
-  },
-  {
-    "text": "on peut faire la liste de courses",
-    "categories": [
-      "TRIGGER_SHOPPING_LIST"
-    ]
-  },
-  {
     "text": "ajoute des pâtes à ma liste",
     "categories": [
       "ADD_TO_LIST"
     ],
     "entities": [
       {
-        "start": 11,
+        "start": 7,
         "end": 16,
         "name": "SHOPITEM"
       }
@@ -147,7 +19,7 @@
     ],
     "entities": [
       {
-        "start": 11,
+        "start": 7,
         "end": 18,
         "name": "SHOPITEM"
       }
@@ -160,9 +32,730 @@
     ],
     "entities": [
       {
-        "start": 10,
+        "start": 7,
         "end": 30,
         "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "je veux ajouter des cornichons à la liste de courses",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 16,
+        "end": 30,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "ajouter du sucre sur la liste",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 8,
+        "end": 16,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "mets des haricots sur ma liste",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 5,
+        "end": 17,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "mets du pain sur la liste de courses",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 5,
+        "end": 12,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "rajoute une boîte de sardines dans la liste",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 8,
+        "end": 29,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "je veux mettre un paquet de céréales dans ma liste",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 15,
+        "end": 36,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "il me manque du sel mets-en sur la liste",
+    "categories": [
+      "ADD_TO_LIST"
+    ],
+    "entities": [
+      {
+        "start": 13,
+        "end": 19,
+        "name": "SHOPITEM"
+      }
+    ]
+  },
+  {
+    "text": "chrome cast pause",
+    "categories": [
+      "CHROME_CAST_PAUSE"
+    ],
+    "entities": []
+  },
+  {
+    "text": "appuie sur pause",
+    "categories": [
+      "CHROME_CAST_PAUSE"
+    ],
+    "entities": []
+  },
+  {
+    "text": "mets en pause",
+    "categories": [
+      "CHROME_CAST_PAUSE"
+    ],
+    "entities": []
+  },
+  {
+    "text": "pause le film",
+    "categories": [
+      "CHROME_CAST_PAUSE"
+    ],
+    "entities": []
+  },
+  {
+    "text": "pause",
+    "categories": [
+      "CHROME_CAST_PAUSE"
+    ],
+    "entities": []
+  },
+  {
+    "text": "chrome cast play",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": []
+  },
+  {
+    "text": "appuie sur play",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": []
+  },
+  {
+    "text": "lance le film",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": []
+  },
+  {
+    "text": "lance le chrome cast du salon",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": [
+      {
+        "start": 24,
+        "end": 29,
+        "name": "instrument"
+      }
+    ]
+  },
+  {
+    "text": "mets le chrome cast dans la chambre",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": [
+      {
+        "start": 28,
+        "end": 35,
+        "name": "instrument"
+      }
+    ]
+  },
+  {
+    "text": "play",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": []
+  },
+  {
+    "text": "lance play",
+    "categories": [
+      "CHROME_CAST_PLAY"
+    ],
+    "entities": []
+  },
+  {
+    "text": "combien il y a d'éléments dans ma liste",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "compte les éléments de ma liste",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "il y a combien de choses dans ma liste",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "compte les choses de ma liste",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "ça fait combien d'éléments dans la liste",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux savoir la taille de ma liste de courses",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "taille de la liste",
+    "categories": [
+      "COUNT_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "vide ma liste",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "supprime ma liste",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "supprime toute ma liste",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "remets à zéro ma liste de courses",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "vide la liste",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "supprime les choses de ma liste",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "vide toute la liste de courses",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux supprimer la liste",
+    "categories": [
+      "EMPTY_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "quelle heure il est",
+    "categories": [
+      "GET_TIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "il est quelle heure",
+    "categories": [
+      "GET_TIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "dis-moi l'heure",
+    "categories": [
+      "GET_TIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "j'ai besoin de connaître l'heure",
+    "categories": [
+      "GET_TIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "donne-moi l'heure",
+    "categories": [
+      "GET_TIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "heure",
+    "categories": [
+      "GET_TIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "quel temps il fait à Paris",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": [
+      {
+        "start": 21,
+        "end": 26,
+        "name": "location"
+      }
+    ]
+  },
+  {
+    "text": "donne-moi la météo",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": []
+  },
+  {
+    "text": "météo",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": []
+  },
+  {
+    "text": "quel temps fait-il",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": []
+  },
+  {
+    "text": "peux-tu mettre la météo",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": []
+  },
+  {
+    "text": "la météo d'aujourd'hui",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": []
+  },
+  {
+    "text": "météo à Cannes",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": [
+      {
+        "start": 8,
+        "end": 14,
+        "name": "location"
+      }
+    ]
+  },
+  {
+    "text": "je veux connaître la météo de demain",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": []
+  },
+  {
+    "text": "météo en France",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": [
+      {
+        "start": 9,
+        "end": 15,
+        "name": "location"
+      }
+    ]
+  },
+  {
+    "text": "et à Nice il fait quel temps",
+    "categories": [
+      "GET_WEATHER"
+    ],
+    "entities": [
+      {
+        "start": 5,
+        "end": 9,
+        "name": "location"
+      }
+    ]
+  },
+  {
+    "text": "bonjour",
+    "categories": [
+      "HELLO"
+    ],
+    "entities": []
+  },
+  {
+    "text": "salut",
+    "categories": [
+      "HELLO"
+    ],
+    "entities": []
+  },
+  {
+    "text": "hello",
+    "categories": [
+      "HELLO"
+    ],
+    "entities": []
+  },
+  {
+    "text": "salutations",
+    "categories": [
+      "HELLO"
+    ],
+    "entities": []
+  },
+  {
+    "text": "bien le bonjour",
+    "categories": [
+      "HELLO"
+    ],
+    "entities": []
+  },
+  {
+    "text": "qu'est-ce qu'il y a au cinéma",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "donne-moi les films au ciné ce soir",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "qu'y a-t-il au ciné",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "cinéma",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "les films au cinéma",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "c'est quoi les films au ciné",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux voir un film au cinéma ce soir",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "quels sont les films à l'affiche",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "les films à l'affiche",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "films au ciné",
+    "categories": [
+      "LAST_SHOWTIME"
+    ],
+    "entities": []
+  },
+  {
+    "text": "qu'est-ce que j'ai sur ma liste",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "il y a quoi sur ma liste",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "qu'est-ce qu'il y a dans ma liste",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "donne ma liste de courses",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "les éléments de ma liste",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux voir ma liste de courses",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "qu'y a-t-il sur ma liste",
+    "categories": [
+      "LIST_LIST_ITEMS"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux regarder star wars à la télé",
+    "categories": [
+      "PLAY_MOVIE"
+    ],
+    "entities": [
+      {
+        "start": 17,
+        "end": 26,
+        "name": "title"
+      }
+    ]
+  },
+  {
+    "text": "mets harry potter",
+    "categories": [
+      "PLAY_MOVIE"
+    ],
+    "entities": [
+      {
+        "start": 5,
+        "end": 17,
+        "name": "title"
+      }
+    ]
+  },
+  {
+    "text": "mets un film sur la télé du salon",
+    "categories": [
+      "PLAY_MOVIE"
+    ],
+    "entities": [
+      {
+        "start": 28,
+        "end": 33,
+        "name": "instrument"
+      }
+    ]
+  },
+  {
+    "text": "je veux regarder the lego movie 2 dans la chambre",
+    "categories": [
+      "PLAY_MOVIE"
+    ],
+    "entities": [
+      {
+        "start": 17,
+        "end": 33,
+        "name": "title"
+      },
+      {
+        "start": 42,
+        "end": 49,
+        "name": "instrument"
+      }
+    ]
+  },
+  {
+    "text": "je veux écouter Mickael Jackson",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": [
+      {
+        "start": 16,
+        "end": 31,
+        "name": "artist"
+      }
+    ]
+  },
+  {
+    "text": "lance de la musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "envoie la musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "écouter de la musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "mets la musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "mets de la musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux écouter de la musique",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "je veux écouter de la salsa",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": []
+  },
+  {
+    "text": "mets Sum 41",
+    "categories": [
+      "PLAY_MUSIC"
+    ],
+    "entities": [
+      {
+        "start": 5,
+        "end": 11,
+        "name": "artist"
       }
     ]
   },
@@ -170,36 +763,74 @@
     "text": "mets un minuteur de 10 minutes",
     "categories": [
       "SET_TIMER"
+    ],
+    "entities": [
+      {
+        "start": 20,
+        "end": 30,
+        "name": "duration"
+      }
     ]
   },
   {
     "text": "mets un timer de 15 minutes",
     "categories": [
       "SET_TIMER"
+    ],
+    "entities": [
+      {
+        "start": 17,
+        "end": 27,
+        "name": "duration"
+      }
     ]
   },
   {
-    "text": "quel temps il fait à Paris",
+    "text": "lance un minuteur de 3 minutes",
     "categories": [
-      "GET_WEATHER"
+      "SET_TIMER"
+    ],
+    "entities": [
+      {
+        "start": 21,
+        "end": 30,
+        "name": "duration"
+      }
     ]
   },
   {
-    "text": "donne-moi la météo",
+    "text": "on fait la liste de courses",
     "categories": [
-      "GET_WEATHER"
-    ]
+      "TRIGGER_SHOPPING_LIST"
+    ],
+    "entities": []
   },
   {
-    "text": "météo",
+    "text": "c'est parti pour la liste de courses",
     "categories": [
-      "GET_WEATHER"
-    ]
+      "TRIGGER_SHOPPING_LIST"
+    ],
+    "entities": []
   },
   {
-    "text": "quel temps fait-il",
+    "text": "faisons les courses",
     "categories": [
-      "GET_WEATHER"
-    ]
+      "TRIGGER_SHOPPING_LIST"
+    ],
+    "entities": []
+  },
+  {
+    "text": "on peut faire la liste de courses",
+    "categories": [
+      "TRIGGER_SHOPPING_LIST"
+    ],
+    "entities": []
+  },
+  {
+    "text": "liste de courses",
+    "categories": [
+      "TRIGGER_SHOPPING_LIST"
+    ],
+    "entities": []
   }
 ]

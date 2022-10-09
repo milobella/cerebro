@@ -25,6 +25,13 @@ $ sanic cerebro.server.app --dev
 
 ## Upload and train a model
 When the server is running, this is not over. You have two tasks to perform to make it work.
+To facilitate these steps scripts has been built in [scripts]() folder.
+```bash
+cd scripts
+./upload_model.sh
+./train_model.sh
+./poll_model.sh # To repeat until the 503 message disappears /!\ It can take several minutes
+```
 
 #### Upload the model (not necessary if the model is already in database)
 ```bash

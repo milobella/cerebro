@@ -50,7 +50,7 @@ class TestRestApiDeprecated(object):
         result["intents"] | should.not_be.empty
         result["intents"][0]['label'] | should.be.equal.to('ADD_TO_LIST')
         result["entities"] | should.not_be.empty
-        result["entities"][0] | should.be.equal.to({'label': 'SHOPITEM', 'text': 'fraises'})
+        result["entities"][0] | should.be.equal.to({'label': 'SHOPITEM', 'text': 'des fraises'})
 
     def test_understand__trigger_shopping_list(self):
         resp = self._api.understand("on fait la liste de course")
@@ -59,3 +59,15 @@ class TestRestApiDeprecated(object):
         result["intents"] | should.not_be.empty
         result["intents"][0]['label'] | should.be.equal.to('TRIGGER_SHOPPING_LIST')
         result["entities"] | should.be.empty
+
+    def test_understand__play_movie(self):
+        resp = self._api.understand("je veux regarder the lego movie 2 dans la chambre")
+        resp.ok | should.be.true
+        result = json.loads(resp.content)
+        result["intents"] | should.not_be.empty
+        result["intents"][0]['label'] | should.be.equal.to('PLAY_MOVIE')
+        result["entities"] | should.be.equal.to([
+            {'label': 'title', 'text': 'the lego'},
+            {'label': 'title', 'text': 'movie 2'},
+            {'label': 'instrument', 'text': 'chambre'}
+        ])
