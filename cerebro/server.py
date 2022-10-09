@@ -7,8 +7,7 @@ import yaml as yaml
 from sanic import Sanic
 from sanic.config import Config
 
-from cerebro.repository.nlp_repository import Repository
-from cerebro.repository.nlp_repository_fake import NLPRepositoryFake
+from cerebro.repository.nlp_repository_memory import NLPRepositoryMemory
 from cerebro.repository.nlp_repository_mongo import NLPRepositoryMongo
 from cerebro.spacy.spacy_manager import SpaCyModelManager
 from cerebro.spacy.spacy_request_service import SpaCyRequestService
@@ -43,6 +42,15 @@ class YamlConfig(Config):
         return retval
 
 
+# Initialize logger
+logging_format = "[%(asctime)s] %(process)d-%(levelname)s "
+logging_format += "%(module)s::%(funcName)s():l%(lineno)d: "
+logging_format += "%(message)s"
+
+logging.basicConfig(
+    format=logging_format,
+    level=logging.DEBUG
+)
 logger = logging.getLogger()
 
 # Initialize the sanic app
@@ -55,7 +63,7 @@ if config["CEREBRO"]["FEATURES"]["USE_MONGO"]:
         database=config["CEREBRO"]["MONGODB"]["DATABASE"]
     )
 else:
-    repository = NLPRepositoryFake()
+    repository = NLPRepositoryMemory()
 
 app.add_route(HtmlView.as_view(), '/')
 app.add_route(SamplesView.as_view(repository), '/models/<model_id:str>/samples')
@@ -85,3 +93,6 @@ else:
         "\n\tuse_spacy = true"
         "\n ================="
         "\n################################################")
+
+if __name__ == "__main__":
+    app.run()
