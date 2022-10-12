@@ -13,7 +13,7 @@ class SpaCyRequestService:
 
     def understand(self, text: str) -> Dict:
         # Build the recognition document from text dictated by user.
-        _doc = self._spacy_manager.model(text)
+        _doc = self._spacy_manager.model(text.lower())
 
         # Get entities from document (using trained NER - Named Entity Recognition).
         entities = [{"label": ent.label_, "text": ent.text} for ent in _doc.ents]

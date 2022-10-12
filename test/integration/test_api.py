@@ -4,7 +4,7 @@ import json
 from grappa import should
 
 
-class RestApi:
+class Api:
     def __init__(self, url: str):
         self._url = url
 
@@ -17,18 +17,18 @@ class RestApi:
 
 # noinspection PyStatementEffect
 @pytest.mark.integration
-class TestRestApiDeprecated(object):
+class TestApi(object):
 
     @classmethod
     def setup_class(cls):
-        cls._api = RestApi("http://localhost:9444")
+        cls._api = Api("http://localhost:9444")
 
     def test_hello_world(self):
         resp = self._api.hello_world()
         resp.ok | should.be.true
 
     def test_understand__hello(self):
-        resp = self._api.understand("bonjour")
+        resp = self._api.understand("BoNJoUr")
         resp.ok | should.be.true
         result = json.loads(resp.content)
         result["intents"] | should.not_be.empty
