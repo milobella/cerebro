@@ -76,7 +76,7 @@ class SpacyModelFactory:
         with self._nlp.select_pipes(enable=[pipe_name]):  # only train given pipe
             examples = []
             for text, annots in train_data:
-                examples.append(Example.from_dict(self._nlp.make_doc(text), annots))
+                examples.append(Example.from_dict(self._nlp.make_doc(text.lower()), annots))
             self._nlp.initialize(lambda: examples)
             losses = {}
             for itn in range(self._iterations):
